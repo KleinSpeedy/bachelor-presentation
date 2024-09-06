@@ -1,0 +1,244 @@
+\mode<presentation>
+\usepackage{pgfcomp-version-0-65}
+\usepackage{xcolor}
+\usepackage[default]{sourcesanspro}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{backgrounds,calc,shadings,shapes,shadows,positioning, tikzmark}
+
+\usepackage[export]{adjustbox}
+
+% Evaluating arguments
+\DeclareOptionBeamer{lang}{
+  \def\lang{#1}}
+\DeclareOptionBeamer{color}{
+  \def\maincolor{#1}}
+\ProcessOptionsBeamer
+
+% Setting document language
+
+\def\en{en}
+\def\de{de}
+
+\ifx\lang\en
+  \usepackage[english]{babel}
+  \else\ifx\lang\de
+      \usepackage[ngerman]{babel}
+    \else
+      \@latex@error{Invalid language input: the option lang takes either de or en}
+  \fi
+\fi
+
+% No Navigation Symbols
+\setbeamertemplate{navigation symbols}{}
+
+\definecolor{htwkyellow}{rgb}{0.996,0.925,0}
+\definecolor{htwkgrau}{rgb}{0.945,0.945,0.945}
+\definecolor{htwknavy}{rgb}{0,0.273,0.597}
+\definecolor{htwkpink}{rgb}{0.894,0,0.488}
+\definecolor{htwkrot}{rgb}{0.894,0.1875,0.035}
+\definecolor{htwkgruen}{rgb}{0,0.586,0.304}
+\definecolor{htwkcyan}{rgb}{0,0.617,0.886}
+\definecolor{htwkgreen}{rgb}{0,0.6,0}
+
+\def\cyan{cyan}
+\def\yellow{yellow}
+\def\pink{pink}
+\def\navy{navy}
+\def\green{green}
+
+% ============================================================================
+
+\ifx\maincolor\cyan
+   \definecolor{main}{named}{htwkcyan}
+   \definecolor{alert}{named}{htwkpink}
+   \definecolor{example}{named}{htwknavy}
+   \definecolor{blocktitle}{named}{white}
+   \definecolor{alerttitle}{named}{white}
+   \definecolor{exampletitle}{named}{white}  
+ \else\ifx\maincolor\yellow
+     \definecolor{main}{named}{htwkyellow}
+     \definecolor{alert}{named}{htwkpink}
+     \definecolor{example}{named}{htwknavy}
+     \definecolor{blocktitle}{named}{black}
+     \definecolor{alerttitle}{named}{white}
+     \definecolor{exampletitle}{named}{white} 
+   \else\ifx\maincolor\green
+       \definecolor{main}{named}{htwkgreen}
+       \definecolor{alert}{named}{htwkpink}
+       \definecolor{example}{named}{htwknavy}
+       \definecolor{blocktitle}{named}{white}
+       \definecolor{alerttitle}{named}{white}
+       \definecolor{exampletitle}{named}{white}
+     \else\ifx\maincolor\pink
+         \definecolor{main}{named}{htwkpink}
+         \definecolor{alert}{named}{htwknavy}
+         \definecolor{example}{named}{htwkyellow}
+         \definecolor{blocktitle}{named}{white}
+         \definecolor{alerttitle}{named}{white}
+         \definecolor{exampletitle}{named}{black}
+       \else\ifx\maincolor\navy
+           \definecolor{main}{named}{htwknavy}
+           \definecolor{alert}{named}{htwkpink}
+           \definecolor{example}{named}{htwkyellow}
+           \definecolor{blocktitle}{named}{white}
+           \definecolor{alerttitle}{named}{white}
+           \definecolor{exampletitle}{named}{black}
+ \else
+   \@latex@error{Invalid color input: the option color takes either cyan, navy, pink, yellow or green}
+     \fi
+    \fi
+   \fi
+  \fi
+\fi
+
+ 
+ 
+% Setting Colors
+%Titlepage
+\setbeamercolor{title}{fg=black}
+\setbeamercolor{author}{fg=black}
+
+%Itemize
+\setbeamercolor{itemize item}{fg=black}
+\setbeamercolor{itemize subitem}{fg=black}
+\setbeamercolor{itemize subsubitem}{fg=black}
+
+% Enumerate
+\setbeamercolor{enumerate item}{fg=black}
+\setbeamercolor{enumerate subitem}{fg=black}
+\setbeamercolor{enumerate subsubitem}{fg=black}
+
+%TOC
+\setbeamercolor{section in toc}{fg=black}
+\setbeamercolor{subsection in toc}{fg=black}
+\setbeamercolor{section in toc shaded}{fg=black, bg=main}
+\setbeamercolor{section number projected}{bg=main, fg=blocktitle}
+\setbeamercolor{subsection number projected}{bg=main, fg=white}
+
+% Captions
+\setbeamercolor{caption}{fg = black}
+\setbeamercolor{caption name}{fg = black}
+
+%Block
+\setbeamercolor{block body}{use=structure, bg=main!10, fg=black}
+\setbeamercolor{block title}{bg=main, fg=blocktitle}
+\setbeamercolor{block frame}{fg=main}
+
+% Alert Block
+\setbeamercolor{block body alerted}{use=structure, bg=alert!10, fg=black}
+\setbeamercolor{block title alerted}{bg=alert, fg=alerttitle}
+\setbeamercolor{block frame alerted}{fg=alert}
+
+% Example Block
+\setbeamercolor{block body example}{use=structure, bg=example!10, fg=black}
+\setbeamercolor{block title example}{bg=example, fg=exampletitle}
+\setbeamercolor{block frame example}{fg=example}
+
+% Setting Fonts
+\setbeamerfont{title}{size = \huge}
+\setbeamerfont{author}{size = \large}
+
+% Setting Shapes
+\setbeamertemplate{itemize item}[circle]
+\setbeamertemplate{itemize subitem}[triangle]
+\setbeamertemplate{itemize subsubitem}[square]
+\setbeamertemplate{section in toc}[circle]
+\setbeamertemplate{subsection in toc}[square]
+
+% Setting inner Theme
+%\useinnertheme{rectangles}
+\setbeamertemplate{blocks}[rectangle]
+\setbeamertemplate{alertblock}[rectangle]
+\setbeamertemplate{exampleblock}[rectangle]
+
+% Correcting Distance between TOC-Items
+\patchcmd{\beamer@sectionintoc}
+  {\vfill}
+  {\vskip\itemsep}
+  {}
+  {}
+
+% Enable counter for figures and tables
+\setbeamertemplate{caption}[numbered]
+  
+% Setting outer Theme
+\defbeamertemplate*{title page}{htwkcyan}[1][]
+{ 
+  \begin{tikzpicture}[overlay, remember picture]
+    \ifx\maincolor\cyan
+      {\node[inner sep=0pt,outer sep=0pt,anchor=south east] at (current page.south east)
+      {\includegraphics[width=\the\paperwidth,height=\the\paperheight]{assets/backgrounds/diagonal_cyan.png}};}
+    \else\ifx\maincolor\yellow
+        {\node[inner sep=0pt,outer sep=0pt,anchor=south east] at (current page.south east)
+          {\includegraphics[width=\the\paperwidth,height=\the\paperheight]{assets/backgrounds/diagonal_yellow.png}};}
+      \else\ifx\maincolor\green
+         {\node[inner sep=0pt,outer sep=0pt,anchor=south east] at (current page.south east)
+           {\includegraphics[width=\the\paperwidth,height=\the\paperheight]{assets/backgrounds/diagonal_green.png}};}
+         \else\ifx\maincolor\pink
+         {\node[inner sep=0pt,outer sep=0pt,anchor=south east] at (current page.south east)
+           {\includegraphics[width=\the\paperwidth,height=\the\paperheight]{assets/backgrounds/diagonal_pink.png}};}
+         \else\ifx\maincolor\navy
+         {\node[inner sep=0pt,outer sep=0pt,anchor=south east] at (current page.south east)
+           {\includegraphics[width=\the\paperwidth,height=\the\paperheight]{assets/backgrounds/diagonal_navy.png}};}
+         \fi 
+             \fi
+         \fi
+      \fi
+    \fi
+    
+    \end{tikzpicture}
+    \vskip2cm%
+    %% "title page header"  defines the loaded colors.
+    \begin{beamercolorbox}[center,sep=8pt,#1]{title page header}
+      \usebeamerfont{title}\huge\titel\par%
+    \end{beamercolorbox}%
+    \vskip0.75cm%
+    \begin{beamercolorbox}[center,#1]{author}
+      \usebeamerfont{author}{\autor}%
+    \end{beamercolorbox}
+     \vskip0.2cm%
+    \begin{beamercolorbox}[center,#1]{date}
+      \usebeamerfont{author}{\today}%
+    \end{beamercolorbox}
+    \vfill
+}
+
+\defbeamertemplate*{frametitle}{main}[1][]{%
+  \vskip0.5cm%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=1.2cm]{frametitle} 
+  \begin{tikzpicture}
+  \useasboundingbox[fill=white](0,0) rectangle(\paperwidth,1.2);
+  \fill[main] (0,0) rectangle(0.02\paperwidth,1.2);
+  \fill[main] (0.98\paperwidth,0) rectangle(\paperwidth,1.2);
+   \ifx\insertframesubtitle\@empty%
+      {\node[anchor=west, black,font=\bfseries\large] at (0.05\paperwidth,0.61){\insertframetitle};}
+      \else%
+      {\node[anchor= west, black,font=\bfseries\large] at (0.05\paperwidth,0.81){\insertframetitle};%
+       \node[anchor= west, black,font=\small] at (0.05\paperwidth,0.41){\insertframesubtitle};}%
+      \fi
+  \end{tikzpicture}
+  \end{beamercolorbox}
+}
+
+\setbeamertemplate{footline}[text line]{%
+  \begin{beamercolorbox}[ht=3em, wd=\paperwidth, leftskip=1cm, rightskip=1cm]{footline}
+      \raisebox{0.7cm}{\textbf{\insertpagenumber}}
+    \hspace{1cm}
+    \ifx\lang\de
+    {\raisebox{0.7cm}{
+        \begin{tabular}{l}\autor, \acs{fim} \\ \acl{htwk} \end{tabular}}}
+  \else\ifx\lang\en
+      {\raisebox{0.7cm}{
+          \begin{tabular}{l}\autor, \acs{fim} \\ HTWK Leipzig University of Applied Sciences \end{tabular}}}
+          \fi
+\fi
+    \hfill
+    \raisebox{0.5cm}{\includegraphics[width=2cm]{assets/logos/htwk_black.png}}
+  \end{beamercolorbox}
+}
+
+\mode<all>

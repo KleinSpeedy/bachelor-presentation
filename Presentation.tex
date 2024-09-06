@@ -1,0 +1,29 @@
+%!TEX TS-program = lualatex
+%!TEX encoding = UTF-8 Unicode
+%!TEX root = Presentation.tex
+%!TEX spellcheck = de_DE
+%!BIB program = biber
+
+% Default aspectratio is 16:9
+\def\SetBeamerAspectRatio{169}
+
+\documentclass[aspectratio=\SetBeamerAspectRatio, 15pt]{beamer}
+
+% choose color from: cyan, green, navy, pink, yellow, choose lang from: en, de
+\usetheme[color=cyan, lang=de]{HTWK}
+
+\input{settings/Packages}
+\input{misc/Acronyms}
+\input{settings/CustomConfigs}
+
+% Setting title author and date from CustomConfigs
+
+\begin{document}
+
+% Docuemnt title and toc
+\import{slides/intro/}{TitleSlide.tex}
+\import{slides/intro/}{ToCSlide.tex}
+
+\import{slides/}{1_Grundlagen.tex}
+
+\end{document}
