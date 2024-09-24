@@ -1,0 +1,131 @@
+%!TeX root = ./../Presentation.tex
+
+\section{Implementation und Tests}
+
+\begin{frame}[fragile]
+    \begin{center}
+        \huge\textbf{\insertsection}
+    \end{center}
+\end{frame}
+
+\subsection{QEMU Erweiterung}
+
+\begin{frame}[fragile]
+\frametitle{\insertsection}
+\framesubtitle{\insertsubsection}
+
+\begin{block}{Beschreibung}
+Das QEMU Projekt wird direkt durch ein explizites Mikrocontroller Modell
+    erweitert.
+Der SoC erstellt Speicherregionen, Peripheriegeräte und implementiert eine
+    spezifische Mikroprozessor Architektur.
+Eine Auswahl erfolgt mittels einer Maschine.
+\end{block}
+
+\end{frame}
+
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+\framesubtitle{\insertsubsection}
+
+\begin{itemize}
+    \item Implementierung mittels QEMU APIs (\texttt{QDev}, \texttt{QOM})
+    \item Erweiterung der Build Konfigurationen um Implementation von Maschine
+        und SoC
+    \item Integration der Peripherie
+    \begin{itemize}
+        \item Verwendung STM32F2 UART Implementation
+        \item Eigenständige GPIO Implementierung
+    \end{itemize}
+    \item GPIO Modul implementiert reduzierten Funktionsumfang
+\end{itemize}
+
+\end{frame}
+
+\subsection{EDI Erweiterung}
+
+\begin{frame}[fragile]
+\frametitle{\insertsection}
+\framesubtitle{\insertsubsection}
+
+\begin{block}{Beschreibung}
+QEMU wird durch ein generisches Maschinenmodell und
+    Funktionalitäten für IPC erweitert.
+Die Emulation, beziehungsweise Simulation, der Peripherie wird in externe
+    Prozesse ausgelagert, welche unabhängig von QEMU existieren.
+Erstellung und Konfiguration der Komponenten erfolgt mittels der
+    Kommandozeilenanwendung.
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{\insertsection}
+\framesubtitle{\insertsubsection}
+
+\begin{itemize}
+    \item Zweiteiliges Softwareprojekt von \textit{KPlaps}\cite{KplCodeDive}
+        \begin{itemize}
+            \item QEMU Erweiterung durch EDI und IPC
+            \item EDI Demo Projekt für UART und GPIO
+        \end{itemize}
+    \item Kommunikation durch Integration von Nanomsg in QEMU Event Loop
+    \item Software benötigt eine extra Abstraktionsebene je nach
+        Laufzeitumgebung
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{\insertsection}
+\framesubtitle{\insertsubsection}
+
+\begin{alertblock}{Problem}
+\begin{itemize}
+    \item unterschiedliche Build Systeme (CMake vs Meson)
+    \item unterschiedliche Mikrocontroller Varianten (STM32F1 vs STM32F4)
+    \item nutzt \texttt{libopencm3} statt gängiger HAL und CMSIS
+        Bibliotheken\cite{YJDefinitiveGuide}
+\end{itemize}
+\end{alertblock}
+\vspace{5mm}
+\hspace{5mm}\textbf{\rightarrow}\hspace{5mm} Die Portierung der Demo
+    Applikation ist zu aufwändig und komplex!
+\end{frame}
+
+\subsection{Entwicklungstests}
+
+\begin{frame}[fragile]
+\frametitle{\insertsection}
+\framesubtitle{\insertsubsection}
+
+\textbf{Implementierung:}
+\begin{itemize}
+    \item Testprojekt nutzt eigenständiges Projekt mit HAL und CMSIS
+        Bibliotheken
+    \item Orientierung an Vorlage aus der STM32CubeF4 Bibliothek
+    \item Programmierung in C, Konflikt mit Testprogramm für EDI Erweiterung
+        (C++)
+    \item Simples Testprogramm für UART und GPIO Peripherie
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{\insertsection}
+\framesubtitle{\insertsubsection}
+
+\textbf{Testausführung:}
+\begin{block}{GPIO Tests}
+    \begin{itemize}
+        \item Toggle der Pins 0 und 7 GPIO Port B
+        \item Tracing der Funktions-Aufrufe
+    \end{itemize}
+\end{block}
+
+\begin{block}{UART Tests}
+    \begin{itemize}
+        \item Mikrocontroller sendet Zeichenkette an Host-System
+        \item Sperrung der GPIO Pin Konfiguration
+    \end{itemize}
+\end{block}
+
+\end{frame}

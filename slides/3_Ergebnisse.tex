@@ -1,0 +1,45 @@
+%!TeX root = ./../Presentation.tex
+
+\section{Ergebnisse}
+
+\begin{frame}[fragile]
+    \begin{center}
+        \huge\textbf{\insertsection}
+    \end{center}
+\end{frame}
+
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+\begin{block}{QEMU Erweiterung}
+\begin{itemize}
+    \item Software benötigt nur geringfügige Anpassungen um sowohl in QEMU als
+        auch auf Hardware lauffähig zu sein
+    \item Nutzung bereits integrierter, kompatibler Peripherie Module möglich
+    \item Test der GPIO Zustände aufgrund fehlender Simulation nur mittels
+        Tracing möglich
+\end{itemize}
+\end{block}
+\newpage
+\begin{block}{EDI Erweiterung}
+\begin{itemize}
+    \item Firmware benötigt zwingend eine extra Abstraktionsebene und ist nicht
+        ohne größere Anpassungen auf realer Hardware lauffähig
+    \item Portierung des Demo Projekts zu umständlich und komplex
+    \item Peripherie Simulation ist theoretisch einfach erweiterbar
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{\insertsection}
+
+\textbf{Ausblick:}
+\begin{itemize}
+    \item Vervollständigung der bereits vorhandenen Peripherie (GPIO)
+    \item Integration komplexer Peripherie wie Ethernet oder CAN
+    \item Visualisierung des Mikrocontrollers und Testboards (LEDs, Pins)
+\end{itemize}
+
+\end{frame}

@@ -1,0 +1,60 @@
+%!TeX root = ./../Presentation.tex
+
+\section{Problemstellung und Zielstellung}
+
+\begin{frame}[fragile]
+    \begin{center}
+        \huge\textbf{\insertsection}
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{\insertsection}
+% Was ist das Problem?
+
+\begin{itemize}
+    \item Inkompatibilität der Befehlssatzarchitekturen zwischen Entwicklungs-
+        und Zielplattform
+    \item Lieferengpässe bei Halbleitertechnologie aufgrund externer Faktoren
+    \item Mangelhafter Zugang zu Testhardware
+\end{itemize}
+\vspace{5mm}
+\hspace{5mm}\rightarrow\hspace{5mm} Reduktion der Entwicklungsgeschwindigkeit
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{\insertsection}
+% Wie löse ich Problem
+
+\begin{itemize}
+    \item Emulation des Mikrocontrollers \textbf{STM32F429} mittels QEMU
+    \item Ausführung der Software für eingebettete Systeme
+    \begin{itemize}
+        \item in emulierter Umgebung
+        \item auf realer Hardware-Umgebung
+    \end{itemize}
+\end{itemize}
+\begin{alertblock}{Problem}
+    QEMU enthält keine Integration für den STM32F429 Mikrocontroller, aber
+    Integrationen für verwandete Mikrocontroller der STM32F2 und F4 Familien
+    und kompatibler Peripherie.
+\end{alertblock}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{\insertsection}
+\framesubtitle{Ablauf der Implementierung}
+
+\begin{enumerate}
+    \item Implementierung der Maschine und des SoC
+    \item Identifikation geeigneter, kompatibler Peripherie
+    \item prototypische Implementierung der Peripherie in QEMU
+    \begin{itemize}
+        \item direkt in QEMU als Teil des Mikrocontrollers
+        \item als externer Prozess mittels EDI
+    \end{itemize}
+    \item Test der Implementierungen in QEMU und auf Hardware
+\end{enumerate}
+
+\end{frame}
