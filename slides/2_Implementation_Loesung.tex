@@ -16,28 +16,43 @@
 
 \begin{block}{Beschreibung}
 Das QEMU Projekt wird direkt durch ein explizites Mikrocontroller Modell
-    erweitert.
-Der SoC erstellt Speicherregionen, Peripheriegeräte und implementiert eine
-    spezifische Mikroprozessor Architektur.
-Eine Auswahl erfolgt mittels einer Maschine.
+erweitert.\newline
+Der SoC erstellt Speicherregionen, Peripheriegeräte und implementiert\newline
+eine spezifische Mikroprozessor Architektur.\newline
+Die Auswahl des SoC erfolgt mittels einer Maschine.
 \end{block}
 
 \end{frame}
 
-\begin{frame}[allowframebreaks]
+\begin{frame}[fragile]
+\frametitle{\insertsection}
+\framesubtitle{\insertsubsection}
+
+Analyse und Identifikation der bereits in QEMU integrierten Peripherie.\newline
+\textbf{Existiert bereits:}
+\begin{itemize}
+    \item SysCfg und EXTI (STM32F4)
+    \item Timer, ADC und SPI (STM32F2)
+    \item USART (STM32F2) \rightarrow\hspace{1mm} ausgewählt für Tests
+\end{itemize}
+\textbf{Existiert noch nicht:}
+\begin{itemize}
+    \item GPIO Controller \rightarrow\hspace{1mm} ausgewählt für selbständige
+        Implementierung
+    \item Ethernet, CAN, RCC, etc.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
 \frametitle{\insertsection}
 \framesubtitle{\insertsubsection}
 
 \begin{itemize}
     \item Implementierung mittels QEMU APIs (\texttt{QDev}, \texttt{QOM})
-    \item Erweiterung der Build Konfigurationen um Implementation von Maschine
-        und SoC
-    \item Integration der Peripherie
-    \begin{itemize}
-        \item Verwendung STM32F2 UART Implementation
-        \item Eigenständige GPIO Implementierung
-    \end{itemize}
-    \item GPIO Modul implementiert reduzierten Funktionsumfang
+    \item Erweiterung der Build Konfigurationen
+    \item Implementierung von Testmaschine und SoC
+    \item Implementierung der Peripherie
 \end{itemize}
 
 \end{frame}
@@ -50,11 +65,11 @@ Eine Auswahl erfolgt mittels einer Maschine.
 
 \begin{block}{Beschreibung}
 QEMU wird durch ein generisches Maschinenmodell und
-    Funktionalitäten für IPC erweitert.
+Funktionalitäten für IPC erweitert.\newline
 Die Emulation, beziehungsweise Simulation, der Peripherie wird in externe
-    Prozesse ausgelagert, welche unabhängig von QEMU existieren.
+Prozesse ausgelagert, welche unabhängig von QEMU existieren.\newline
 Erstellung und Konfiguration der Komponenten erfolgt mittels der
-    Kommandozeilenanwendung.
+Kommandozeilenanwendung.
 \end{block}
 
 \end{frame}
